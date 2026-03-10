@@ -1,1 +1,84 @@
-<p>loan-application-list works!</p>
+<div class="page-wrapper">
+  <div class="page-header">
+    <div>
+      <h2 class="page-title">Loan Applications</h2>
+      <p class="page-subtitle">{{ allLoans().length }} total applications</p>
+    </div>
+    <a routerLink="/new-loan-form" class="btn-add">
+      <i class="fa fa-plus"></i> New Application
+    </a>
+  </div>
+
+  <!-- Filter Tabs -->
+  <div class="filter-tabs">
+    @for (tab of tabs; track tab) {
+      <button
+        class="filter-tab"
+        [class.active]="activeFilter() === tab"
+        (click)="setFilter(tab)"
+      >
+        {{ tab }}
+        <span class="tab-count">{{ countFor(tab) }}</span>
+      </button>
+    }
+  </div>
+
+  <!-- Table -->
+  <div class="table-card">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Loan ID</th>
+          <th>Customer</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Duration</th>
+          <th>Submitted</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (loan of filteredLoans(); track loan.id) {
+          <tr>
+            <td class="mono">{{ loan.loanId }}</td>
+            <td class="bold">{{ loan.customerName }}</td>
+            <td>
+              <span class="loan-type-badge loan-type-{{ loan.loanType.toLowerCase() }}">
+                {{ loan.loanType }}
+              </span>
+            </td>
+            <td class="amount">{{ formatCurrency(loan.amount) }}</td>
+            <td>{{ loan.durationMonths }} months</td>
+            <td class="muted">{{ loan.submittedDate }}</td>
+            <td>
+              <span class="badge"
+                [class.badge-pending]="loan.status === 'Pending'"
+                [class.badge-approved]="loan.status === 'Approved'"
+                [class.badge-rejected]="loan.status === 'Rejected'"
+              >
+                {{ loan.status }}
+              </span>
+            </td>
+            <td>
+              @if (loan.status === 'Pending') {
+                <div class="action-btns">
+                  <button class="btn-approve" (click)="approve(loan.id)">
+                    <i class="fa fa-check"></i> Approve
+                  </button>
+                  <button class="btn-reject" (click)="reject(loan.id)">
+                    <i class="fa fa-times"></i> Reject
+                  </button>
+                </div>
+              } @else {
+                <span class="muted">—</span>
+              }
+            </td>
+          </tr>
+        } @empty {
+          <tr><td colspan="8" class="empty-row">No applications found for this filter.</td></tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

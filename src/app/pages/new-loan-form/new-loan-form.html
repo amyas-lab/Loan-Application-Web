@@ -1,1 +1,66 @@
-<p>new-loan-form works!</p>
+<div class="page-wrapper">
+  <div class="form-card">
+    @if (success()) {
+      <div class="success-banner">
+        <i class="fa fa-check-circle"></i>
+        Loan application submitted successfully! Redirecting...
+      </div>
+    }
+
+    <div class="form-card-header">
+      <h2 class="page-title">New Loan Application</h2>
+      <p class="page-subtitle">Fill in the form below to submit a new application.</p>
+    </div>
+
+    <div class="form-grid">
+      <!-- Customer -->
+      <div class="form-group full-width">
+        <label>Customer *</label>
+        <select [(ngModel)]="form.customerId">
+          <option [ngValue]="null" disabled>— Select a customer —</option>
+          @for (c of customers(); track c.id) {
+            <option [ngValue]="c.id">{{ c.name }} ({{ c.nationalId }})</option>
+          }
+        </select>
+      </div>
+
+      <!-- Loan Type -->
+      <div class="form-group">
+        <label>Loan Type *</label>
+        <select [(ngModel)]="form.loanType">
+          <option value="" disabled>— Select type —</option>
+          @for (t of loanTypes; track t) {
+            <option [value]="t">{{ t }}</option>
+          }
+        </select>
+      </div>
+
+      <!-- Amount -->
+      <div class="form-group">
+        <label>Loan Amount (VND) *</label>
+        <input type="number" [(ngModel)]="form.amount" placeholder="e.g. 100000000" min="0" />
+      </div>
+
+      <!-- Duration -->
+      <div class="form-group">
+        <label>Duration (months) *</label>
+        <input type="number" [(ngModel)]="form.durationMonths" placeholder="e.g. 24" min="1" />
+      </div>
+
+      <!-- Purpose -->
+      <div class="form-group full-width">
+        <label>Purpose / Notes</label>
+        <textarea [(ngModel)]="form.purpose" placeholder="Describe the purpose of this loan..." rows="4"></textarea>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn-cancel" (click)="reset()">
+        <i class="fa fa-refresh"></i> Reset
+      </button>
+      <button class="btn-submit" (click)="submit()">
+        <i class="fa fa-paper-plane"></i> Submit Application
+      </button>
+    </div>
+  </div>
+</div>
