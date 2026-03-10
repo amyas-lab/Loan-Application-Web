@@ -1,0 +1,296 @@
+/* ========== Base reset & defaults ========== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+html, body {
+  height: 100%;
+}
+
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #e2e2e2, #c9d6ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+
+/* ========== Parent wrapper ========== */
+.parent {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 12px;
+}
+
+
+/* ===== Use higher specificity to override Bootstrap's .container =====
+  If you prefer not to use Bootstrap overrides, rename your .container
+  in HTML to .login-container and remove the ".parent .container" selector. */
+.parent .container {
+  position: relative;
+  width: 850px;
+  max-width: calc(100% - 40px); /* keep inside viewport on small screens */
+  height: 550px;
+  background: #fff;
+  margin: 20px auto;
+  border-radius: 30px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+}
+
+
+/* ========== Form boxes ========== */
+.form-box {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  padding: 48px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.6s cubic-bezier(.2,.8,.2,1);
+  background: transparent;
+  color: #222;
+}
+
+.toggle-box {
+  z-index: 5;
+}
+
+
+
+/* login on the right by default */
+.form-box.login {
+  left: 50%;
+  z-index: 1;
+  opacity: 1;
+}
+
+
+/* register on the left by default */
+.form-box.register {
+  left: 0;
+  z-index: 1;
+  opacity: 0;
+}
+
+
+/* When NOT active (default): show Login on right, Register hidden on left */
+.parent .container:not(.active) .login {
+  left: 50%;
+  opacity: 1;
+  z-index: 5;
+}
+
+.parent .container:not(.active) .register {
+  left: 0;
+  opacity: 0;
+  z-index: 1;
+}
+
+/* When ACTIVE (Register mode): show Register on left, hide Login */
+.parent .container.active .login {
+  left: 50%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.parent .container.active .register {
+  left: 0;
+  opacity: 1;
+  z-index: 5;
+}
+
+
+/* ===== Toggle / blue left panel styling ===== */
+.toggle-box {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: #6a8cff;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  flex-direction: column;
+  text-align: center;
+  transition: right 0.6s cubic-bezier(.2,.8,.2,1);
+  border-radius: 0 30px 30px 0;
+}
+
+
+/* position changes with .active to create animation */
+.parent .container.active .toggle-box {
+  right: 0; /* stays on the right when active */
+}
+
+
+.parent .container:not(.active) .toggle-box {
+  right: 50%; /* visible on left half when not active */
+}
+
+
+/* toggle panel content */
+.toggle-box h1 {
+  margin: 0 0 10px 0;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+
+.toggle-box p {
+  margin: 0 0 22px 0;
+  opacity: 0.95;
+}
+
+
+/* ===== Form elements ===== */
+.form-box h1 {
+  margin: 0 0 20px 0;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+
+.input-box {
+  width: 100%;
+  margin: 12px 0;
+  position: relative;
+}
+
+
+.input-box input {
+  width: 100%;
+  padding: 12px 44px 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #e6e6e6;
+  background: #f6f6f6;
+  font-size: 0.95rem;
+  outline: none;
+  transition: box-shadow .15s ease, border-color .15s ease;
+}
+
+
+.input-box input:focus {
+  border-color: #8aa1ff;
+  box-shadow: 0 6px 20px rgba(106,140,255,0.12);
+}
+
+
+.input-box i {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  font-size: 18px;
+}
+
+
+/* forgot link */
+.forgot-link {
+  width: 100%;
+  text-align: right;
+  margin-top: 8px;
+}
+.forgot-link a {
+  color: #333;
+  text-decoration: underline;
+  font-size: 0.9rem;
+}
+
+
+/* main CTA */
+.btn {
+  display: inline-block;
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: none;
+  background: #6a8cff;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform .12s ease, background .12s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+
+
+/* toggle button inside the blue panel */
+.toggle-box .btn {
+  width: auto;
+  padding: 10px 20px;
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+}
+.toggle-box .btn:hover { background: #fff; color: #6a8cff; }
+
+
+/* social icons row */
+.social-icons {
+  margin-top: 18px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+}
+.social-icons a {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  background: #f3f3f3;
+  border-radius: 8px;
+  color: #333;
+  text-decoration: none;
+}
+
+
+/* ========== Responsive tweaks ========== */
+@media (max-width: 900px) {
+  .parent .container {
+    width: 92%;
+    height: auto;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+
+  /* stack everything vertically on small screens */
+  .form-box,
+  .toggle-box {
+    position: relative;
+    width: 100%;
+    left: 0 !important;
+    opacity: 1 !important;
+    padding: 28px;
+    border-radius: 16px;
+  }
+
+
+  .toggle-box {
+    margin-top: 18px;
+    border-radius: 12px;
+  }
+}
+
