@@ -1,1 +1,101 @@
-<p>customer-list works!</p>
+<div class="page-wrapper">
+  <div class="page-header">
+    <div>
+      <h2 class="page-title">Customer Directory</h2>
+      <p class="page-subtitle">{{ filteredCustomers().length }} of {{ allCustomers().length }} customers shown</p>
+    </div>
+    <button class="btn-add" (click)="openModal()">
+      <i class="fa fa-plus"></i> Add Customer
+    </button>
+  </div>
+
+  <!-- Search bar -->
+  <div class="search-bar">
+    <i class="fa fa-search search-icon"></i>
+    <input
+      type="text"
+      placeholder="Search by name, email or ID..."
+      [ngModel]="searchQuery()"
+      (ngModelChange)="searchQuery.set($event)"
+    />
+  </div>
+
+  <!-- Customer cards grid -->
+  <div class="cards-grid">
+    @for (customer of filteredCustomers(); track customer.id) {
+      <div class="customer-card">
+        <div class="card-top">
+          <div class="avatar avatar-customer">{{ getInitials(customer.name) }}</div>
+          <div class="card-actions">
+            <button class="btn-icon btn-danger" (click)="deleteCustomer(customer.id)" title="Delete">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+        </div>
+        <div class="customer-name">{{ customer.name }}</div>
+        <div class="customer-id">ID: {{ customer.nationalId }}</div>
+        <div class="customer-details">
+          <div class="detail-row">
+            <i class="fa fa-envelope"></i>
+            <span>{{ customer.email }}</span>
+          </div>
+          <div class="detail-row">
+            <i class="fa fa-phone"></i>
+            <span>{{ customer.phone }}</span>
+          </div>
+          <div class="detail-row">
+            <i class="fa fa-map-marker"></i>
+            <span>{{ customer.address }}</span>
+          </div>
+          <div class="detail-row">
+            <i class="fa fa-calendar"></i>
+            <span>Joined {{ customer.registeredDate }}</span>
+          </div>
+        </div>
+      </div>
+    } @empty {
+      <div class="empty-state">
+        <i class="fa fa-users"></i>
+        <p>No customers match your search.</p>
+      </div>
+    }
+  </div>
+</div>
+
+<!-- Modal -->
+@if (showModal()) {
+  <div class="modal-backdrop" (click)="closeModal()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Add New Customer</h3>
+        <button class="modal-close" (click)="closeModal()"><i class="fa fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" [(ngModel)]="form.name" placeholder="Nguyen Thi A" />
+        </div>
+        <div class="form-group">
+          <label>National ID *</label>
+          <input type="text" [(ngModel)]="form.nationalId" placeholder="079xxxxxxxxx" />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" [(ngModel)]="form.email" placeholder="customer@email.com" />
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="text" [(ngModel)]="form.phone" placeholder="09xx xxx xxx" />
+        </div>
+        <div class="form-group">
+          <label>Address</label>
+          <input type="text" [(ngModel)]="form.address" placeholder="Street, City" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" (click)="closeModal()">Cancel</button>
+        <button class="btn-submit" (click)="addCustomer()">Add Customer</button>
+      </div>
+    </div>
+  </div>
+}
