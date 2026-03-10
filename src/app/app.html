@@ -1,28 +1,37 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="javascript:void(0)">Logo</a>
+    <a class="navbar-brand" routerLink="/banker-list">
+      <i class="fa fa-university"></i> LoanApp
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="mynavbar">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" routerLink="bankerList">Bankers</a>
+          <a class="nav-link" routerLink="/banker-list" routerLinkActive="active">
+            <i class="fa fa-id-badge"></i> Bankers
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="customerList">Customers</a>
+          <a class="nav-link" routerLink="/customer-list" routerLinkActive="active">
+            <i class="fa fa-users"></i> Customers
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="loan-application-list">Applications</a>
+          <a class="nav-link" routerLink="/loan-application-list" routerLinkActive="active">
+            <i class="fa fa-file-text"></i> Applications
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="new-loan-form">New Loan</a>
+          <a class="nav-link" routerLink="/new-loan-form" routerLinkActive="active">
+            <i class="fa fa-plus-circle"></i> New Loan
+          </a>
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="text" placeholder="Search">
-        <button class="btn btn-primary" routerLink="login">Login</button>
-      </form>
+      <a class="btn btn-outline-light btn-sm" routerLink="/login">
+        <i class="fa fa-sign-out"></i> Logout
+      </a>
     </div>
   </div>
 </nav>
