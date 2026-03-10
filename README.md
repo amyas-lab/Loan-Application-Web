@@ -1,59 +1,61 @@
-# LoanApplicationWeb
+# Loan Application Web
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.6.
+This project is a web-based Loan Application management system built with Angular. It is designed to demonstrate a complete flow for managing bankers, customers, and loan applications with a modern Single-Page Application (SPA) architecture.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- **Authentication**: User login portal.
+- **Banker Management**: View and manage bank staff list.
+- **Customer Management**: View and manage customer profiles.
+- **Loan Applications**:
+  - List all current loan applications.
+  - Create new loan applications via an integrated submission form.
 
-```bash
-ng serve
-```
+## Technology Stack
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Framework**: Angular 17+
+- **Styling**: Bootstrap 5, FontAwesome
+- **Language**: TypeScript
 
-## Code scaffolding
+## Getting Started
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Prerequisites
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+Ensure you have Node.js and npm installed on your local machine. You will also need the Angular CLI.
 
 ```bash
-ng build
+npm install -g @angular/cli
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Installation
 
-## Running unit tests
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/amyas-lab/Loan-Application-Web.git
+   cd Loan-Application-Web
+   ```
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-```bash
-ng test
-```
+### Development Server
 
-## Running end-to-end tests
+Run `ng serve` or `npm start` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-For end-to-end (e2e) testing, run:
+### Build
 
-```bash
-ng e2e
-```
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Project Structure
 
-## Additional Resources
+- `src/app/pages/login`: Login component.
+- `src/app/pages/banker-list`: Banker management.
+- `src/app/pages/customer-list`: Customer directory.
+- `src/app/pages/loan-application-list`: Dashboard for loan applications.
+- `src/app/pages/new-loan-form`: Form to submit new loans.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## License
+
+This project is licensed under the MIT License.
